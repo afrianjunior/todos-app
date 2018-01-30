@@ -1,0 +1,140 @@
+body {
+  font-family: 'Fira Sans', sans-serif;
+  color: rgba(0, 0, 0, .7);
+  font-weight: 300;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Fira Sans', sans-serif;
+  font-weight: 900;
+  line-height: 1.04;
+  letter-spacing: -.015em;
+}
+
+.container {
+  width: 450px;
+  display: block;
+  margin: 100px auto;
+  padding: 1em;
+}
+
+.to-input_wrapper {
+  padding: 10px 20px;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,.14);
+  border-radius: 4px;
+}
+
+.to-input {
+  transition: all .3s ease;
+  border: none;
+  outline: none;
+  padding: 0;
+  width: 100%;
+  font-size: 28px;
+  color: rgba(0, 0, 0, .7);
+}
+
+.to-todo {
+  margin-top: 20px;
+  max-height: 318px;
+  overflow-y: auto;
+}
+
+.to-todo::-webkit-scrollbar {
+    width: 1px;
+}
+
+/* Track */
+.to-todo::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, .1);
+}
+ 
+/* Handle */
+.to-todo::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, .3);
+}
+
+/* Handle on hover */
+.to-todo::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, .4);
+}
+
+.to-todo .to-todo_item:first-child {
+  margin: 0;
+}
+
+.to-todo_item {
+  padding: 10px 20px;
+  margin: 10px 0 0 0;
+  border-left: 1px solid rgba(0, 0, 0, .4);
+}
+
+.to-todo_item.active {
+  opacity: .4;
+  text-decoration: line-through;
+  border-left: 1px solid rgba(0, 0, 0, .2);
+  /* font-weight: 300; */
+}
+
+.to-todo_text {
+  position: relative;
+  padding: 2px 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  /* font-weight: 400; */
+}
+
+
+.to-todo_action {
+  float: right;
+  text-align: right;
+  font-size: 12px;
+}
+
+.to-todo_done {
+  padding: 4px;
+  border-radius: 4px;
+  color: rgba(0, 0, 0, .7);
+  background-color: #e4ffde;
+  cursor: pointer;
+}
+
+.to-clean {
+  margin-top: 20px;
+  font-size: 11px;
+  text-align: right;
+}
+
+.to-clean_action {
+  cursor: pointer;
+}
+
+.to-status {
+  margin: 20px 0 0 0;
+  padding: 0 20px;
+  font-size: 12px;
+  opacity: .6;
+}
+
+.to-status_complete_count {
+  color: #01a3a4;
+  font-weight: 900;
+}
+
+.bounce-enter-active {
+  animation: bounce-in .5s;
+}
+.bounce-leave-active {
+  animation: bounce-in .5s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

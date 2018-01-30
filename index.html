@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>TODOS</title>
+  <script src="./vue.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Fira+Sans:300,500,700,800" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="shortcut icon" type="image/png" href="favicon.png" />
+</head>
+<body>
+  <section id="app">
+    <div class="container">
+        <h1>STAY POSITIVE</h1>
+      <div class="to-input_wrapper">
+        <input 
+          class="to-input" 
+          type="text" 
+          v-model="input" 
+          @keypress.enter="addTodo"
+          placeholder="You need something today">
+      </div>
+      <div class="to-status" v-if="todos.length > 0">
+        <div class="to-status_complete">
+           Done Task : <span class="to-status_complete_count">{{ completeTodo }}</span>
+        </div>
+      </div>
+      <div class="to-todo">
+        <div class="to-todo_item" v-for="(todo, index) in todos" :class="{ active: todo.done }" @click="toDoneAndUndone(index)">
+          <transition name="bounce">
+            <div class="to-todo_text">
+              {{ todo.text }}
+            </div>
+            <!-- <div class="to-todo_action">
+                      <div class="to-todo_done" @click="toDone(index)" v-if="">done</div>
+                    </div> -->
+          </transition>
+        </div>
+      </div>
+      <!-- <div class="to-clean">
+        <div class="to-clean_action">
+          clearing is done
+        </div>
+      </div> -->
+    </div>
+  </section>
+
+  <script>
+
+    new Vue({
+      el: '#app',
+      data: {
+        input: '',
+        todos: []
+      },
+      computed: {
+        completeTodo: function () {
+          var count = 0
+          this.todos.forEach((obj) => {
+            if (obj.done === true) {
+              count += 1
+            }
+          })
+
+          return count
+        },
+        percentage: function () {
+          var count = 0
+          this.todos.forEach((obj) => {
+            if (obj.done === true) {
+              count += 1
+            }
+          })
+
+          return count
+        } 
+      },
+      mounted: function () {
+        this.syncDatabase()
+      },
+      methods: {
+        saveDatabase: function () {
+          var self = this
+          localStorage.setItem("todos", JSON.stringify(self.todos));
+        },
+        syncDatabase: function () {
+          var db = localStorage.getItem("todos")
+          if (db !== null) {
+            this.todos = JSON.parse(db)
+          }
+        },
+        addTodo: function () {
+          var self = this;
+          this.todos.unshift({
+            text: self.input,
+            done: false,
+            date: new Date()
+          })
+          this.saveDatabase()
+          this.input = ''
+        },
+        toDoneAndUndone: function (key) {
+          var self = this
+          this.todos.find((obj, index) => {
+            if (index === key) {
+              obj.done = !obj.done
+              self.saveDatabase()
+            }
+          })
+        }
+      }
+    })
+  </script>
+</body>
+</html>
