@@ -24,9 +24,14 @@
       </div>
       <div class="to-status" v-if="todos.length > 0">
         <div class="to-status_complete">
-           Done Task : <span class="to-status_complete_count">{{ completeTodo }}</span>
-           <span>|</span>
-           Data Size : <span class="to-status_complete_count">{{ memorySizeOf }}</span>
+            Done Task : 
+            <span class="to-status_complete_count">{{ completeTodo }}</span>
+            <span>|</span>
+            Complete :
+            <span class="to-status_complete_count">{{ percentage }} %</span>
+            <span>|</span>
+            Data Size : 
+            <span class="to-status_complete_count">{{ memorySizeOf }}</span>
         </div>
       </div>
       <div class="to-todo">
@@ -108,14 +113,9 @@
           return count
         },
         percentage: function () {
-          var count = 0
-          this.todos.forEach((obj) => {
-            if (obj.done === true) {
-              count += 1
-            }
-          })
+          var total = this.todos.length
 
-          return count
+          return Math.round(this.completeTodo / total * 100)
         } 
       },
       mounted: function () {
